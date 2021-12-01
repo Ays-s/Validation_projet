@@ -8,7 +8,7 @@ class HConfig(list):
         m = max(self)[0]
         for stack in self:
             h += sum(stack) * m
-            m *=2
+            m *= 2
         return h
 
     def __eq__(self, config):
@@ -19,6 +19,7 @@ class HConfig(list):
                 if config[i][j] != self[i][j]:
                     return False
         return True
+
 
 class Hanoi(TransitionRelation, AcceptingSet):
     def __init__(self, nb_stacks, nb_disks):
@@ -50,20 +51,3 @@ class Hanoi(TransitionRelation, AcceptingSet):
                 return False
             k += 1
         return True
-
-
-if __name__ == '__main__':
-    hanoi = Hanoi(3, 3)
-    initial = hanoi.initial()
-    print(f'Graph initial: {initial}')
-    step1 = hanoi.next(initial)
-    print(f'\nStep_1   : {step1}')
-    for i in range(len(step1)):
-        print(f'Step_2.{i} : {hanoi.next(step1[i])}')
-
-    print('\n-- Hash --')
-    for i in range(len(step1)):
-        print(f'Step_{i}   : {hash(step1[i])} -- {step1[i]}')
-        step2 = hanoi.next(step1[i])
-        for j in range(len(step2)):
-            print(f'Step_{i}.{j} : {hash(step2[j])} -- {step2[j]}')

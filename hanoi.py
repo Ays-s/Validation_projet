@@ -8,7 +8,7 @@ class Hanoi(TransitionRelation, AcceptingSet):
         self.nDisks = nb_disks
 
     def initial(self):
-        return [[(self.nDisks-i) for i in range(self.nDisks)]] + [[]] * (self.nStacks-1)
+        return [[(self.nDisks-i) for i in range(self.nDisks)]] + [[] for _ in range(self.nStacks-1)]
 
     def next(self, node):
         next_states = []
@@ -17,21 +17,12 @@ class Hanoi(TransitionRelation, AcceptingSet):
         for i in range(self.nStacks):
             if newNode[i]:
                 disk = newNode[i].pop()
-                reset = False
                 for j in range(self.nStacks):
-                    if i != j:
-                        if newNode[j]:
-                            if newNode[j][-1] < disk:
-                                newNode[j].append(disk)
-                                next_states.append(newNode)
-                                reset = True
-                        else:
-                            newNode[j].append(disk)
-                            next_states.append(newNode)
-                            reset = True
-                        if reset:
-                            newNode = copy.deepcopy(node)
-                            reset = False
+                    if i!= j and (not newNode[j] or newNode[j][-1] > disk):
+                        tmp = copy.deepcopy(newNode)
+                        tmp[j].append(disk)
+                        next_states.append(tmp)
+
         return next_states
 
 a = Hanoi(3, 3)

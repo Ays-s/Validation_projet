@@ -34,12 +34,12 @@ if __name__ == '__main__':
     print(f'Accessibles nodes from {A} : {A_access_list}')
 
     D_access_list = graph.list_depth_first_search(D)
-    print('Accessibles nodes from {D} : {D_access_list}')
+    print(f'Accessibles nodes from {D} : {D_access_list}')
 
     # Get reachable nodes
     print('\n-- Hash method')
     A_access_hash = graph.hash_depth_first_search(A)
-    print('Accessibles nodes from {A} : {A_access_hash}')
+    print(f'Accessibles nodes from {A} : {A_access_hash}')
 
     D_access_hash = graph.hash_depth_first_search(D)
-    print('Accessibles nodes from {D} : {D_access_hash}')
+    print(f'Accessibles nodes from {D} : {D_access_hash}')

@@ -20,7 +20,7 @@ class IdentityProxy:
 
 class ParentStoreProxy(IdentityProxy):
     def __init__(self, opperand):
-        super.__init__(opperand)
+        super().__init__(opperand)
         self.parents =  {}
 
     def next(self, config):

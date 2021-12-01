@@ -1,7 +1,12 @@
+import sys
+
 from src.graph import Graph
 from src.node import Node
 from tools.algorithms import *
 from models.hanoi import *
+
+
+sys.setrecursionlimit(1000)
 
 
 if __name__ == '__main__':
@@ -63,7 +68,7 @@ if __name__ == '__main__':
             print(f'Step_{i}.{j} : {hash(step2[j])} -- {step2[j]}')
 
     parentStore = ParentStoreProxy(hanoi)
-    res = find_accepting_bfs(parentStore)
+    res, n = find_accepting_bfs(parentStore)
 
-    print(res)
+    print(res, n)
 

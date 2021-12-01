@@ -1,6 +1,6 @@
-from graph import Graph
-from node import Node
-from algorithms import *
+from src.graph import Graph
+from src.node import Node
+from tools.algorithms import *
 
 
 if __name__ == '__main__':

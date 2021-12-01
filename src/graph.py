@@ -1,5 +1,4 @@
-from typing import Deque
-from kernel import AcceptingSet, TransitionRelation
+from src.kernel import AcceptingSet, TransitionRelation
 
 
 class Graph(TransitionRelation):
@@ -48,5 +47,3 @@ class NFA(Graph, AcceptingSet):
     
     def is_accepting(self, c):
         return c in self.accepting
-
-   

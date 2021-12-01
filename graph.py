@@ -1,26 +1,8 @@
-"""
-Graph class : 
-    - attributes : 
-        - nodes : nodes composing the graph
-    
-    - Objectives : 
-        - represents a Graph composed of Nodes (type Node)
-    
-    - types specifications : 
-        - nodes is a list of Nodes type
-
-Invoke class :
-    - create an instance by giving a list of already created Nodes instances
-    - call list/hash_depth_first_search to do a depth first search on the graph from a given starting node
-"""
-
-
 from typing import Deque
+from kernel import AcceptingSet, TransitionRelation
 
-from kernel import AcceptingSet
 
-
-class Graph(object):
+class Graph(TransitionRelation):
     def __init__(self, nodes):
         self.nodes = nodes
 

@@ -2,6 +2,7 @@ from graph import Graph
 from node import Node
 from algorithms import *
 
+
 if __name__ == '__main__':
 
     # Nodes definition

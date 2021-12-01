@@ -1,20 +1,3 @@
-"""
-Node class : 
-    - attributes : 
-        - name : node name 
-        - neighbors : neighbors in the graph
-    
-    - Objectives : 
-        - represents a Node in a Graph
-
-Invoke class :
-    - import Node class
-    - create an instance by giving a name (str) and a key (16 byte array) use to decrypt messages
-    - call addNeighbors to add a Node as a neighbor of another one
-
-"""
-
-
 class Node:
     def __init__(self, name):
         self.name = name

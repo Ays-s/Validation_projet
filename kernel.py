@@ -1,9 +1,11 @@
-class TransitionRelation():
+class TransitionRelation:
     def initial(self):
         pass
-    def next(self):
+
+    def next(self, node):
         pass
 
-class AcceptingSet():
+
+class AcceptingSet:
     def is_accepting(c):
         pass

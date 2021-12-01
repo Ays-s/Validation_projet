@@ -6,7 +6,7 @@ def reachable_bfs(g, node):
     frontiere = Deque()
     at_start = True
     while frontiere or at_start:
-        if at_start :
+        if at_start:
             neighbours = [node]
             at_start = False
         else:
@@ -15,14 +15,15 @@ def reachable_bfs(g, node):
             if n not in known:
                 known.add(n)
                 frontiere.append(n)
-    return known 
+    return known
+
 
 def is_safe_bfs(g, node):
     known = set()
     frontiere = Deque()
     at_start = True
     while frontiere or at_start:
-        if at_start :
+        if at_start:
             neighbours = [node]
             at_start = False
         else:

@@ -12,9 +12,8 @@ class Hanoi(TransitionRelation, AcceptingSet):
 
     def next(self, node):
         next_states = []
-        newNode = copy.deepcopy(node)
-
         for i in range(self.nStacks):
+            newNode = copy.deepcopy(node)
             if newNode[i]:
                 disk = newNode[i].pop()
                 for j in range(self.nStacks):
@@ -22,10 +21,13 @@ class Hanoi(TransitionRelation, AcceptingSet):
                         tmp = copy.deepcopy(newNode)
                         tmp[j].append(disk)
                         next_states.append(tmp)
-
         return next_states
 
-a = Hanoi(3, 3)
-b = a.initial()
-print(b)
-print(a.next(b))
+if __name__ == '__main__':
+    hanoi = Hanoi(3, 3)
+    initial = hanoi.initial()
+    print(f'Graph initial: {initial}')
+    step1 = hanoi.next(initial)
+    print(f'\nStep 1 : {step1}')
+    for i in range(len(step1)):
+        print(f'Step2.{i} : {hanoi.next(step1[i])}')

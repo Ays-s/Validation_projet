@@ -7,5 +7,5 @@ class TransitionRelation:
 
 
 class AcceptingSet:
-    def is_accepting(c):
+    def is_accepting(self, c):
         pass

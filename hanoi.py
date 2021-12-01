@@ -2,13 +2,31 @@ from src.kernel import *
 import copy
 
 
+class HConfig(list):
+    def __hash__(self):
+        h = 0
+        m = max(self)[0]
+        for stack in self:
+            h += sum(stack) * m
+            m *=2
+        return h
+
+    def __eq__(self, config):
+        if len(self) != len(config):
+            return False
+        for i in range(len(self)):
+            for j in range(len(self[i])):
+                if config[i][j] != self[i][j]:
+                    return False
+        return True
+
 class Hanoi(TransitionRelation, AcceptingSet):
     def __init__(self, nb_stacks, nb_disks):
         self.nStacks = nb_stacks
         self.nDisks = nb_disks
 
     def initial(self):
-        return [[(self.nDisks-i) for i in range(self.nDisks)]] + [[] for _ in range(self.nStacks-1)]
+        return HConfig([[(self.nDisks-i) for i in range(self.nDisks)]] + [[] for _ in range(self.nStacks-1)])
 
     def next(self, node):
         next_states = []
@@ -28,6 +46,13 @@ if __name__ == '__main__':
     initial = hanoi.initial()
     print(f'Graph initial: {initial}')
     step1 = hanoi.next(initial)
-    print(f'\nStep 1 : {step1}')
+    print(f'\nStep_1   : {step1}')
     for i in range(len(step1)):
-        print(f'Step2.{i} : {hanoi.next(step1[i])}')
+        print(f'Step_2.{i} : {hanoi.next(step1[i])}')
+
+    print('\n-- Hash --')
+    for i in range(len(step1)):
+        print(f'Step_{i}   : {hash(step1[i])} -- {step1[i]}')
+        step2 = hanoi.next(step1[i])
+        for j in range(len(step2)):
+            print(f'Step_{i}.{j} : {hash(step2[j])} -- {step2[j]}')

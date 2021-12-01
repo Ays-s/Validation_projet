@@ -22,20 +22,20 @@ if __name__ == '__main__':
     C.addNeighbors(D)
 
     # Graph definition
-    france = Graph([A, B, C, D, E])
+    graph = Graph([A, B, C, D, E])
 
     # Get reachable nodes
     print('-- List method')
-    A_access_list = france.list_depth_first_search(A)
+    A_access_list = graph.list_depth_first_search(A)
     print('Accessibles nodes from {} : {}'.format(A, A_access_list))
 
-    D_access_list = france.list_depth_first_search(D)
+    D_access_list = graph.list_depth_first_search(D)
     print('Accessibles nodes from {} : {}'.format(D, D_access_list))
 
     # Get reachable nodes
     print('\n-- Hash method')
-    A_access_hash = france.hash_depth_first_search(A)
+    A_access_hash = graph.hash_depth_first_search(A)
     print('Accessibles nodes from {} : {}'.format(A, A_access_hash))
 
-    D_access_hash = france.hash_depth_first_search(D)
+    D_access_hash = graph.hash_depth_first_search(D)
     print('Accessibles nodes from {} : {}'.format(D, D_access_hash))

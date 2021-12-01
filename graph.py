@@ -15,12 +15,20 @@ Invoke class :
 """
 
 
+from typing import Deque
+
+from kernel import AcceptingSet
+
+
 class Graph(object):
     def __init__(self, nodes):
         self.nodes = nodes
 
     def get_nodes(self):
         return self.nodes
+    
+    def next(self, node):
+        return self.get_outgoing_edges(node)
 
     def get_outgoing_edges(self, node):
         values = node.neighbors.values()
@@ -49,3 +57,14 @@ class Graph(object):
             i += 1
             neighbors = self.get_outgoing_edges(accessible_nodes[i])
         return accessible_nodes
+
+
+class NFA(Graph, AcceptingSet):
+    def __init__(self, nodes, acc):
+        super.__init__(nodes)
+        self.accepting = acc
+    
+    def is_accepting(self, c):
+        return c in self.accepting
+
+   

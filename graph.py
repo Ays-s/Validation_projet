@@ -48,4 +48,4 @@ class Graph(object):
                     accessible_nodes[len(accessible_nodes)] = neighbor
             i += 1
             neighbors = self.get_outgoing_edges(accessible_nodes[i])
-        return accessible_nodes
+        return list(accessible_nodes.values())

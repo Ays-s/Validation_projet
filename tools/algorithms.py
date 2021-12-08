@@ -1,13 +1,13 @@
-from typing import Deque
+from collections import deque
 
 
-def reachable_bfs(g, node):
+def reachable_bfs(g):
     known = set()
-    frontiere = Deque()
+    frontiere = deque()
     at_start = True
     while frontiere or at_start:
         if at_start:
-            neighbours = [node]
+            neighbours = [g.initial()]
             at_start = False
         else:
             neighbours = g.next(frontiere.popleft())
@@ -18,13 +18,13 @@ def reachable_bfs(g, node):
     return known
 
 
-def is_safe_bfs(g, node):
+def is_safe_bfs(g):
     known = set()
-    frontiere = Deque()
+    frontiere = deque()
     at_start = True
     while frontiere or at_start:
         if at_start:
-            neighbours = [node]
+            neighbours = [g.initial()]
             at_start = False
         else:
             neighbours = g.next(frontiere.popleft())
@@ -35,3 +35,22 @@ def is_safe_bfs(g, node):
                 known.add(n)
                 frontiere.append(n)
     return True
+
+
+def find_accepting_bfs(g):
+    known = set()
+    frontiere = deque()
+    at_start = True
+    while frontiere or at_start:
+        if at_start:
+            neighbours = [g.initial()]
+            at_start = False
+        else:
+            neighbours = g.next(frontiere.popleft())
+        for n in neighbours:
+            if g.is_accepting(n):
+                return True, n
+            if n not in known:
+                known.add(n)
+                frontiere.append(n)
+    return False, None

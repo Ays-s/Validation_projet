@@ -2,12 +2,16 @@ from src.kernel import AcceptingSet, TransitionRelation
 
 
 class Graph(TransitionRelation):
-    def __init__(self, nodes):
+    def __init__(self, nodes, initial_node):
         self.nodes = nodes
+        self.initial_node = initial_node
 
     def get_nodes(self):
         return self.nodes
     
+    def initial(self):
+        return self.initial_node
+
     def next(self, node):
         return self.get_outgoing_edges(node)
 

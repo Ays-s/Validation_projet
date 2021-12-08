@@ -1,7 +1,12 @@
+import sys
+
 from src.graph import Graph
 from src.node import Node
 from tools.algorithms import *
 from models.hanoi import *
+
+
+sys.setrecursionlimit(1000)
 
 
 if __name__ == '__main__':
@@ -25,9 +30,9 @@ if __name__ == '__main__':
     C.addNeighbors(D)
 
     # Graph definition
-    graph = Graph([A, B, C, D, E])
+    graph = Graph([A, B, C, D, E], A)
 
-    reachable_A = reachable_bfs(graph, A)
+    reachable_A = reachable_bfs(graph)
     print(f'Noeuds acceessible depuis {A} : {reachable_A}\n')
 
     # Get reachable nodes
@@ -61,3 +66,9 @@ if __name__ == '__main__':
         step2 = hanoi.next(step1[i])
         for j in range(len(step2)):
             print(f'Step_{i}.{j} : {hash(step2[j])} -- {step2[j]}')
+
+    parentStore = ParentStoreProxy(hanoi)
+    res, n = find_accepting_bfs(parentStore)
+
+    print(res, n)
+

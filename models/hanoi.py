@@ -15,6 +15,8 @@ class HConfig(list):
         if len(self) != len(config):
             return False
         for i in range(len(self)):
+            if len(self[i]) != len(config[i]):
+                return False
             for j in range(len(self[i])):
                 if config[i][j] != self[i][j]:
                     return False

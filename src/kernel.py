@@ -12,20 +12,20 @@ class AcceptingSet:
 
 
 class IdentityProxy:
-    def __init__(self, opperand):
-        self.opperand = opperand
+    def __init__(self, operand):
+        self.operand = operand
     
     def __getattr__(self, __attr):
-        return getattr(self.opperand, __attr)
+        return getattr(self.operand, __attr)
 
 
 class ParentStoreProxy(IdentityProxy):
-    def __init__(self, opperand):
-        super().__init__(opperand)
+    def __init__(self, operand):
+        super().__init__(operand)
         self.parents = {}
 
     def next(self, config):
-        neighs = self.opperand.next(config)
+        neighs = self.operand.next(config)
         for n in neighs:
             if n not in self.parents:
                 self.parents[n] = config

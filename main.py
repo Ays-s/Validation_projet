@@ -73,3 +73,7 @@ if __name__ == '__main__':
 
     print(f"Accepted : {res} -> bfs : {n}")
 
+    hanoi_conf = HConfig(3, 3)
+    soup = hanoi_soup(3, 3)
+
+    print(soup.behavior)

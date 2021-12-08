@@ -3,6 +3,9 @@ import copy
 
 
 class HConfig(list):
+    def __init__(self, nb_stacks, nb_disks):
+        list.__init__(self, [[(nb_disks-i) for i in range(nb_disks)]] + [[] for _ in range(nb_stacks-1)])
+        
     def __hash__(self):
         h = 0
         m = max(self)[0]
@@ -29,7 +32,7 @@ class Hanoi(TransitionRelation, AcceptingSet):
         self.nDisks = nb_disks
 
     def initial(self):
-        return HConfig([[(self.nDisks-i) for i in range(self.nDisks)]] + [[] for _ in range(self.nStacks-1)])
+        return HConfig(self.nStacks, self.nDisks)
 
     def next(self, node):
         next_states = []

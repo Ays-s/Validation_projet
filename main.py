@@ -52,7 +52,7 @@ if __name__ == '__main__':
     print(f'Accessibles nodes from {D} : {D_access_hash}')
 
     print("\n-- Hanoi Model")
-    hanoi = Hanoi(3, 3)
+    hanoi = ParentStoreProxy(Hanoi(3, 3))
     initial = hanoi.initial()
     print(f'Graph initial: {initial}')
     step1 = hanoi.next(initial)
@@ -70,25 +70,26 @@ if __name__ == '__main__':
     print('\n-- Accepting_Bfs --')
     parentStore = ParentStoreProxy(hanoi)
     res, n = find_accepting_bfs(parentStore)
-
     print(f"Accepted : {res} -> bfs : {n}")
+    
+    print(f"\n-- Parents --\nParents Hashmap: {parentStore.parents}")
 
     print('\n-- Guard & action --')
-    hanoi = Hanoi(3, 3)
-    for i,j in [(0,1), (0,2), (1,2)]:
+    hanoi = ParentStoreProxy(Hanoi(3, 3))
+    for i, j in [(0, 1), (0, 2), (1, 2)]:
         init = hanoi.initial()
-        guard = guard_def(i,j)
-        action = action_def(i,j)
+        guard = guard_def(i, j)
+        action = action_def(i, j)
         g = guard(init)
-        if g :
+        if g:
             a = action(init)
         print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')
     print('Chaining actions:')
     init = hanoi.initial()
-    for i,j in [(0,2), (0,1), (2,1), (0,2), (1,0), (1,2), (0,2) ]:
-        guard = guard_def(i,j)
-        action = action_def(i,j)
+    for i, j in [(0, 2), (0, 1), (2, 1), (0, 2), (1, 0), (1, 2), (0, 2)]:
+        guard = guard_def(i, j)
+        action = action_def(i, j)
         g = guard(init)
-        if g :
+        if g:
             a = action(init)
         print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')

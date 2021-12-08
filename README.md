@@ -12,6 +12,10 @@ File  : hanoi.py
 * Class : 
   * HConfig
   * Hanoi
+* Methodes : 
+  * guard_def
+  * action_def
+  * hanoi_soup
 
 ### Src
 File  : graph.py  
@@ -38,11 +42,7 @@ File  : algorithms.py
   * reachable_bfs
   * is_safe_bfs
   * find_accepting_bfs
-File  : hanoi_tools.py  
-* Methodes : 
-  * guard_def
-  * action_def
-  * hanoi_soup
+
 
 ## Instalation / run
 

@@ -67,8 +67,9 @@ if __name__ == '__main__':
         for j in range(len(step2)):
             print(f'Step_{i}.{j} : {hash(step2[j])} -- {step2[j]}')
 
+    print('\n-- Accepting_Bfs --')
     parentStore = ParentStoreProxy(hanoi)
     res, n = find_accepting_bfs(parentStore)
 
-    print(res, n)
+    print(f"Accepted : {res} -> bfs : {n}")
 

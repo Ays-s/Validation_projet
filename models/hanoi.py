@@ -5,8 +5,8 @@ import copy
 
 class HConfig(list):
     def __init__(self, nb_stacks, nb_disks):
-        list.__init__(self, [[(nb_disks-i) for i in range(nb_disks)]] + [[] for _ in range(nb_stacks-1)])
-        
+        list.__init__(self, [[(nb_disks - i) for i in range(nb_disks)]] + [[] for _ in range(nb_stacks - 1)])
+
     def __hash__(self):
         h = 0
         m = max(self)[0]

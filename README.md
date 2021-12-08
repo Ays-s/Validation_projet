@@ -7,13 +7,42 @@ ENSTA Bretagne
 
 ## Partie I
 
-### Node
-File  : node.py  
-Class : Node
+### Models
+File  : hanoi.py  
+* Class : 
+  * HConfig
+  * Hanoi
 
-### Graph
+### Src
 File  : graph.py  
-Class : Graph
+* Class : 
+  * Graph
+  * NFA
+
+File  : kernel.py  
+* Class : 
+  * TransitionRelation
+  * AcceptingSet
+  * IdentityProxy
+  * ParentStoreProxy
+  * BehaviorSoup
+  * Behavior
+
+File  : node.py  
+* Class : 
+  * Node
+
+### Tools
+File  : algorithms.py  
+* Methodes : 
+  * reachable_bfs
+  * is_safe_bfs
+  * find_accepting_bfs
+File  : hanoi_tools.py  
+* Methodes : 
+  * guard_def
+  * action_def
+  * hanoi_soup
 
 ## Instalation / run
 

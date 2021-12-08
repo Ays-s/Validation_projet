@@ -60,7 +60,7 @@ class Hanoi(TransitionRelation, AcceptingSet):
 
 
 def guard_def(s, t):
-    return lambda c: len(c.stacks[s]) and (len(c.stacks[t]) == 0 or c.stacks[s][-1] < c.stacks[t][-1])
+    return lambda c: len(c[s]) and (len(c[t]) == 0 or c[s][-1] < c[t][-1])
 
 
 def action_def(s, t):

@@ -73,3 +73,15 @@ if __name__ == '__main__':
 
     print(f"Accepted : {res} -> bfs : {n}")
 
+    print('\n-- Guard & action --')
+    hanoi = Hanoi(3, 3)
+    init = hanoi.initial()
+
+    guard = guard_def(0, 2)
+    action = action_def(0, 2)
+
+    g = guard(init)
+    print(g)
+    if g :
+        a = action(init)
+        print(init)

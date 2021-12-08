@@ -41,3 +41,27 @@ class SemanticTransitionRelation:
 
     def execute(self, conf, action):
         pass
+
+
+class STR2TR:
+    def __init__(self, ope):
+        self.operand = ope
+
+    def initial(self):
+        return self.operand.initial()
+
+    def next(self, c):
+        targets = []
+        for a in self.operand.actions(c):
+            target = self.operand.execute(c, a)
+            targets.append(target)
+        return targets
+
+
+class IsAcceptingProxy(IdentityProxy):
+    def __init__(self, operand, predicate):
+        super().__init__(operand)
+        self.predicate = predicate
+
+    def is_accepting(self, c):
+        return self.predicate(c)

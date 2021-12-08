@@ -1,4 +1,5 @@
 from src.kernel import *
+from src.soup import BehaviorSoup
 import copy
 
 

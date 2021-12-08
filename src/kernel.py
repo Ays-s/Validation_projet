@@ -15,13 +15,14 @@ class IdentityProxy:
     def __init__(self, opperand):
         self.opperand = opperand
     
-    def __getattribute__(self, __name: str):
-        return getattr(self.opperand, __name)
+    def __getattr__(self, __attr):
+        return getattr(self.opperand, __attr)
+
 
 class ParentStoreProxy(IdentityProxy):
     def __init__(self, opperand):
         super().__init__(opperand)
-        self.parents =  {}
+        self.parents = {}
 
     def next(self, config):
         neighs = self.opperand.next(config)

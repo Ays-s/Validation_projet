@@ -1,9 +1,9 @@
-from typing import Deque
+from collections import deque
 
 
 def reachable_bfs(g):
     known = set()
-    frontiere = Deque()
+    frontiere = deque()
     at_start = True
     while frontiere or at_start:
         if at_start:
@@ -20,7 +20,7 @@ def reachable_bfs(g):
 
 def is_safe_bfs(g):
     known = set()
-    frontiere = Deque()
+    frontiere = deque()
     at_start = True
     while frontiere or at_start:
         if at_start:
@@ -39,12 +39,12 @@ def is_safe_bfs(g):
 
 def find_accepting_bfs(g):
     known = set()
-    frontiere = Deque()
+    frontiere = deque()
     at_start = True
     while frontiere or at_start:
         if at_start:
             neighbours = [g.initial()]
-            at_start = True, n
+            at_start = False
         else:
             neighbours = g.next(frontiere.popleft())
         for n in neighbours:

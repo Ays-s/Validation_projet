@@ -73,7 +73,22 @@ if __name__ == '__main__':
 
     print(f"Accepted : {res} -> bfs : {n}")
 
-    hanoi_conf = HConfig(3, 3)
-    soup = hanoi_soup(3, 3)
-
-    print(soup.behavior)
+    print('\n-- Guard & action --')
+    hanoi = Hanoi(3, 3)
+    for i,j in [(0,1), (0,2), (1,2)]:
+        init = hanoi.initial()
+        guard = guard_def(i,j)
+        action = action_def(i,j)
+        g = guard(init)
+        if g :
+            a = action(init)
+        print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')
+    print('Chaining actions:')
+    init = hanoi.initial()
+    for i,j in [(0,2), (0,1), (2,1), (0,2), (1,0), (1,2), (0,2) ]:
+        guard = guard_def(i,j)
+        action = action_def(i,j)
+        g = guard(init)
+        if g :
+            a = action(init)
+        print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')

@@ -77,3 +77,15 @@ def hanoi_soup(nb_stacks, nb_disks):
         for j in range(nb_disks):
             soup.add(f'{i}-{j}', guard_def(i, j), action_def(i, j))
     return soup
+
+
+def isAccepted(c):
+    k = 0
+    if not c[-1]:
+        return False
+    for disk in c[-1]:
+        nDisks = max(max(c))
+        if disk != nDisks - k:
+            return False
+        k += 1
+    return True

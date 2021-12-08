@@ -108,3 +108,35 @@ if __name__ == '__main__':
         for action in actions_init:
             exec_init = behavior_soup.execute(init, action)
             print(f"execution output : {exec_init}")
+
+    print("\n-- STR2TR --")
+    str2tr = STR2TR(behavior_soup)
+    init_str = str2tr.initial()[0]
+    next = str2tr.next(init_str)
+    print(f"next states from {init_str} is : {next}")
+
+    print("\n-- AcceptingProxy --")
+    validation = IsAcceptingProxy(str2tr, isAccepted)
+    print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
+
+    print("\n -- testing whole configuration")
+    soup_test = hanoi_soup(3, 3)
+    behavior_soup_test = BehaviourSoupSemantics(soup_test)
+    str2tr_test = STR2TR(behavior_soup_test)
+
+    test = ParentStoreProxy(str2tr_test)
+    validation_test = IsAcceptingProxy(str2tr_test, isAccepted)
+
+    init_test = test.initial()[0]
+    next_states = test.next(init_test)
+
+    # go = True
+    # while go:
+    #     for state in next_states:
+    #         value = validation_test.is_accepting(state)
+    #         if value:
+    #             res = state
+    #             go = False
+    #             break
+    #     next_states = test.next()
+    # print(f"response : {res}")

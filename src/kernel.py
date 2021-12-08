@@ -1,4 +1,3 @@
-import copy
 class TransitionRelation:
     def initial(self):
         pass
@@ -32,23 +31,13 @@ class ParentStoreProxy(IdentityProxy):
                 self.parents[n] = config
         return neighs
 
-class SemanticTransitionRelation():
+
+class SemanticTransitionRelation:
     def initial(self):
         pass
-    def actions(self,conf):
+
+    def actions(self, conf):
         pass
-    def execute(self,conf,action):
+
+    def execute(self, conf, action):
         pass
-
-
-class BehaviourSoupSemantics(SemanticTransitionRelation):
-    def initial(self):
-        return[self.soup.initial]
-
-    def actions(self,conf):
-        return list(map(lambda beh:beh.action, filter(lambda beh: beh.guard(conf),self.soup.behaviours)))
-
-    def execute(selfself,c,a):
-        target = copy.deepcopy(c)
-        r = a(target)
-        return target

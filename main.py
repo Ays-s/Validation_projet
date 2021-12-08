@@ -1,7 +1,9 @@
+import inspect
 import sys
 
 from src.graph import Graph
 from src.node import Node
+from src.soup import BehaviourSoupSemantics
 from tools.algorithms import *
 from models.hanoi import *
 
@@ -36,7 +38,7 @@ if __name__ == '__main__':
     print(f'Noeuds acceessible depuis {A} : {reachable_A}\n')
 
     # Get reachable nodes
-    print('-- List method')
+    print('-- List method --')
     A_access_list = graph.list_depth_first_search(A)
     print(f'Accessibles nodes from {A} : {A_access_list}')
 
@@ -44,14 +46,14 @@ if __name__ == '__main__':
     print(f'Accessibles nodes from {D} : {D_access_list}')
 
     # Get reachable nodes
-    print('\n-- Hash method')
+    print('\n-- Hash method --')
     A_access_hash = graph.hash_depth_first_search(A)
     print(f'Accessibles nodes from {A} : {A_access_hash}')
 
     D_access_hash = graph.hash_depth_first_search(D)
     print(f'Accessibles nodes from {D} : {D_access_hash}')
 
-    print("\n-- Hanoi Model")
+    print("\n-- Hanoi Model --")
     hanoi = ParentStoreProxy(Hanoi(3, 3))
     initial = hanoi.initial()
     print(f'Graph initial: {initial}')
@@ -71,7 +73,7 @@ if __name__ == '__main__':
     parentStore = ParentStoreProxy(hanoi)
     res, n = find_accepting_bfs(parentStore)
     print(f"Accepted : {res} -> bfs : {n}")
-    
+
     print(f"\n-- Parents --\nParents Hashmap: {parentStore.parents}")
 
     print('\n-- Guard & action --')
@@ -93,3 +95,16 @@ if __name__ == '__main__':
         if g:
             a = action(init)
         print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')
+
+    print("\n-- Hanoi soup --")
+    soup = hanoi_soup(3, 3)
+    behavior_soup = BehaviourSoupSemantics(soup)
+    init = behavior_soup.initial()[0]
+    print(f"initial state : {init}")
+    actions_init = behavior_soup.actions(init)
+
+    if actions_init:
+        print(f"action possible from initial state :\n{inspect.getsource(action)}")
+        for action in actions_init:
+            exec_init = behavior_soup.execute(init, action)
+            print(f"execution output : {exec_init}")

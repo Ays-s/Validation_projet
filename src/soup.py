@@ -4,11 +4,11 @@ import copy
 
 class BehaviorSoup:
     def __init__(self, conf):
-        self.inital = conf
-        self.behavior = []
+        self.initial = conf
+        self.behaviors = []
 
     def add(self, name, guard, action):
-        self.behavior.append(Behavior(name, guard, action))
+        self.behaviors.append(Behavior(name, guard, action))
 
 
 class Behavior:
@@ -32,7 +32,7 @@ class BehaviourSoupSemantics(SemanticTransitionRelation):
         return[self.soup.initial]
 
     def actions(self, conf):
-        return list(map(lambda beh: beh.action, filter(lambda beh: beh.guard(conf), self.soup.behaviours)))
+        return list(map(lambda beh: beh.action, filter(lambda beh: beh.guard(conf), self.soup.behaviors)))
 
     def execute(self, c, a):
         target = copy.deepcopy(c)

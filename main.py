@@ -75,13 +75,20 @@ if __name__ == '__main__':
 
     print('\n-- Guard & action --')
     hanoi = Hanoi(3, 3)
+    for i,j in [(0,1), (0,2), (1,2)]:
+        init = hanoi.initial()
+        guard = guard_def(i,j)
+        action = action_def(i,j)
+        g = guard(init)
+        if g :
+            a = action(init)
+        print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')
+    print('Chaining actions:')
     init = hanoi.initial()
-
-    guard = guard_def(0, 2)
-    action = action_def(0, 2)
-
-    g = guard(init)
-    print(g)
-    if g :
-        a = action(init)
-        print(init)
+    for i,j in [(0,2), (0,1), (2,1), (0,2), (1,0), (1,2), (0,2) ]:
+        guard = guard_def(i,j)
+        action = action_def(i,j)
+        g = guard(init)
+        if g :
+            a = action(init)
+        print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')

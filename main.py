@@ -122,5 +122,9 @@ if __name__ == '__main__':
     result = modelChecker(3, 3)
     if result[0]:
         print(f"Solution found ! --> {result[1]}")
+        aParentStore = ParentStoreProxy(validation)
+        trace = get_trace(find_accepting_bfs, aParentStore)
+        print(f'Trace : {trace}')
     else:
         print(f"No solution founded :(")
+    

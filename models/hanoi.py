@@ -101,3 +101,15 @@ def modelChecker(nStacks, nDisks):
 
     return find_accepting_bfs(parent_test)
 
+def get_trace(afind_actepting_bfs, parentProxy):
+    result, tmp = afind_actepting_bfs(parentProxy)
+    if result:
+        trace = []
+        intial = parentProxy.initial()[0]
+        while tmp != intial:
+            trace.append(tmp)
+            tmp = parentProxy.parents[tmp]
+        trace.append(intial)
+        trace.reverse()
+        return trace
+    

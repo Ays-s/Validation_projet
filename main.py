@@ -118,13 +118,22 @@ if __name__ == '__main__':
     validation = IsAcceptingProxy(str2tr, isAccepted)
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
 
-    print("\n -- testing whole configuration --")
-    result = modelChecker(3, 3)
+    print("\n-- ModelChecker --")
+    result = modelChecker(4, 4)
     if result[0]:
         print(f"Solution found ! --> {result[1]}")
-        aParentStore = ParentStoreProxy(validation)
-        trace = get_trace(find_accepting_bfs, aParentStore)
-        print(f'Trace : {trace}')
     else:
         print(f"No solution founded :(")
-    
+
+
+    print('\n-- Get Trace --')
+    soup = hanoi_soup(4, 4)
+    behavior_soup = BehaviourSoupSemantics(soup)
+    str2tr = STR2TR(behavior_soup)
+    aAcceptingProxy = IsAcceptingProxy(str2tr, isAccepted)
+    aParentStore = ParentStoreProxy(aAcceptingProxy)
+    trace = get_trace(find_accepting_bfs, aParentStore)
+    if trace:
+        print(f'Trace : {trace}')
+    else:
+        print('No Trace.')

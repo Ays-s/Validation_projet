@@ -75,7 +75,7 @@ def hanoi_soup(nb_stacks, nb_disks):
     i_conf = HConfig(nb_stacks, nb_disks)
     soup = BehaviorSoup(i_conf)
     for i in range(nb_stacks):
-        for j in range(nb_disks):
+        for j in range(nb_stacks):
             soup.add(f'{i}-{j}', guard_def(i, j), action_def(i, j))
     return soup
 

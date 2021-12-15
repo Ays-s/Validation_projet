@@ -124,21 +124,8 @@ if __name__ == '__main__':
     behavior_soup_test = BehaviourSoupSemantics(soup_test)
     str2tr_test = STR2TR(behavior_soup_test)
 
-    parent_test = ParentStoreProxy(str2tr_test)
     valid_test = IsAcceptingProxy(str2tr_test, isAccepted)
+    parent_test = ParentStoreProxy(valid_test)
 
-    next_states = parent_test.next(valid_test.initial()[0])
-    notFound = True
-    k = 0
-
-    # while notFound:
-    #     for state in next_states:
-    #         value = valid_test.is_accepting(state)
-    #         k += 1
-    #         if value:
-    #             res = state
-    #             notFound = False
-    #             break
-    #         parent_test.next(state)
-    #     print(next_states)
-    # print(f"response : {res}")
+    res = find_accepting_bfs(parent_test)
+    print(res)

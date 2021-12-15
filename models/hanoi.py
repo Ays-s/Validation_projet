@@ -33,7 +33,7 @@ class Hanoi(TransitionRelation, AcceptingSet):
         self.nDisks = nb_disks
 
     def initial(self):
-        return HConfig(self.nStacks, self.nDisks)
+        return [HConfig(self.nStacks, self.nDisks)]
 
     def next(self, node):
         next_states = []

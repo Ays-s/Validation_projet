@@ -119,7 +119,7 @@ if __name__ == '__main__':
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
 
     print("\n-- ModelChecker --")
-    result = modelChecker(3, 8)
+    result = modelChecker(3, 4)
     if result[0]:
         print(f"Solution found ! --> {result[1]}")
     else:
@@ -127,7 +127,7 @@ if __name__ == '__main__':
 
 
     print('\n-- Get Trace --')
-    soup = hanoi_soup(3, 8)
+    soup = hanoi_soup(3, 4)
     behavior_soup = BehaviourSoupSemantics(soup)
 
     trace = predicateModelChecker(behavior_soup, isAccepted)

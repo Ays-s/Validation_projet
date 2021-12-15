@@ -1,6 +1,5 @@
 import inspect
 import sys
-from typing import Mapping
 
 from src.graph import Graph
 from src.node import Node
@@ -9,6 +8,16 @@ from models.hanoi import *
 
 
 sys.setrecursionlimit(1000)
+
+def usage():
+    print('Usage: python main.py [hanoi/alice]')
+    hanoi = input('Run hanoi ? [Y/n]')
+    if hanoi not in ('n','N','No','Non','no','non'):
+        main_hanoi()
+    else:
+        alice = input('Run alice ? [Y/n]')
+        if alice not in ('n','N','No','Non','no','non'):
+            main_AliceBob()
 
 def main_hanoi():
     print('---- Hanoï ----\n')
@@ -150,16 +159,13 @@ def main_AliceBob():
     print('---- Alice & Bob ----\n')
 
 if __name__ == '__main__':
-    if len(sys.argv) == 2 and sys.argv[1] == 'hanoi':
-        main_hanoi()
-    elif (len(sys.argv) == 2 and sys.argv[1] == 'alice'):
-        main_AliceBob()
+    if len(sys.argv) != 2 :
+        usage()
     else:
-        print('Usage: python main.py [hanoi/alice]')
-        hanoi = input('Run hanoi ? [Y/n]')
-        if hanoi not in ('n','N','No','Non','no','non'):
+        if sys.argv[1] == 'hanoi':
             main_hanoi()
+        elif sys.argv[1] == 'alice':
+            main_AliceBob()
         else:
-            alice = input('Run alice ? [Y/n]')
-            if alice not in ('n','N','No','Non','no','non'):
-                main_AliceBob()
+            usage()
+       

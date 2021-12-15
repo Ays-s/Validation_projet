@@ -119,24 +119,26 @@ if __name__ == '__main__':
     validation = IsAcceptingProxy(str2tr, isAccepted)
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
 
-    print("\n -- testing whole configuration")
+    print("\n -- testing whole configuration --")
     soup_test = hanoi_soup(3, 3)
     behavior_soup_test = BehaviourSoupSemantics(soup_test)
     str2tr_test = STR2TR(behavior_soup_test)
 
-    test = ParentStoreProxy(str2tr_test)
-    validation_test = IsAcceptingProxy(str2tr_test, isAccepted)
+    parent_test = ParentStoreProxy(str2tr_test)
+    valid_test = IsAcceptingProxy(str2tr_test, isAccepted)
 
-    init_test = test.initial()[0]
-    next_states = test.next(init_test)
+    next_states = parent_test.next(valid_test.initial()[0])
+    notFound = True
+    k = 0
 
-    # go = True
-    # while go:
+    # while notFound:
     #     for state in next_states:
-    #         value = validation_test.is_accepting(state)
+    #         value = valid_test.is_accepting(state)
+    #         k += 1
     #         if value:
     #             res = state
-    #             go = False
+    #             notFound = False
     #             break
-    #     next_states = test.next()
+    #         parent_test.next(state)
+    #     print(next_states)
     # print(f"response : {res}")

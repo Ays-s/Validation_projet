@@ -80,12 +80,11 @@ def hanoi_soup(nb_stacks, nb_disks):
 
 
 def isAccepted(c):
-    k = 0
-    if not c[-1]:
+    nDisks = max(max(c))
+
+    if len(c[-1]) != nDisks:
         return False
-    for disk in c[-1]:
-        nDisks = max(max(c))
-        if disk != nDisks - k:
+    for k in range(nDisks):
+        if c[-1][k] != nDisks - k:
             return False
-        k += 1
     return True

@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     print("\n-- Hanoi Model --")
     hanoi = ParentStoreProxy(Hanoi(3, 3))
-    initial = hanoi.initial()
+    initial = hanoi.initial()[0]
     print(f'Graph initial: {initial}')
     step1 = hanoi.next(initial)
     print(f'\nStep_1   : {step1}')
@@ -79,7 +79,7 @@ if __name__ == '__main__':
     print('\n-- Guard & action --')
     hanoi = ParentStoreProxy(Hanoi(3, 3))
     for i, j in [(0, 1), (0, 2), (1, 2)]:
-        init = hanoi.initial()
+        init = hanoi.initial()[0]
         guard = guard_def(i, j)
         action = action_def(i, j)
         g = guard(init)
@@ -87,7 +87,7 @@ if __name__ == '__main__':
             a = action(init)
         print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')
     print('Chaining actions:')
-    init = hanoi.initial()
+    init = hanoi.initial()[0]
     for i, j in [(0, 2), (0, 1), (2, 1), (0, 2), (1, 0), (1, 2), (0, 2)]:
         guard = guard_def(i, j)
         action = action_def(i, j)

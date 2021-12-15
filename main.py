@@ -3,7 +3,6 @@ import sys
 
 from src.graph import Graph
 from src.node import Node
-from src.soup import BehaviourSoupSemantics
 from tools.algorithms import *
 from models.hanoi import *
 
@@ -120,12 +119,8 @@ if __name__ == '__main__':
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
 
     print("\n -- testing whole configuration --")
-    soup_test = hanoi_soup(3, 3)
-    behavior_soup_test = BehaviourSoupSemantics(soup_test)
-    str2tr_test = STR2TR(behavior_soup_test)
-
-    valid_test = IsAcceptingProxy(str2tr_test, isAccepted)
-    parent_test = ParentStoreProxy(valid_test)
-
-    res = find_accepting_bfs(parent_test)
-    print(res)
+    result = modelChecker(3, 3)
+    if result[0]:
+        print(f"Solution found ! --> {result[1]}")
+    else:
+        print(f"No solution founded :(")

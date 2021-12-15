@@ -1,6 +1,7 @@
 from src.kernel import *
-from src.soup import BehaviorSoup
+from src.soup import BehaviorSoup, BehaviourSoupSemantics
 import copy
+from tools.algorithms import find_accepting_bfs
 
 
 class HConfig(list):
@@ -88,3 +89,15 @@ def isAccepted(c):
         if c[-1][k] != nDisks - k:
             return False
     return True
+
+
+def modelChecker(nStacks, nDisks):
+    soup_test = hanoi_soup(nStacks, nDisks)
+    behavior_soup_test = BehaviourSoupSemantics(soup_test)
+    str2tr_test = STR2TR(behavior_soup_test)
+
+    valid_test = IsAcceptingProxy(str2tr_test, isAccepted)
+    parent_test = ParentStoreProxy(valid_test)
+
+    return find_accepting_bfs(parent_test)
+

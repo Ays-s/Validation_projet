@@ -5,6 +5,7 @@ from src.graph import Graph
 from src.node import Node
 from tools.algorithms import *
 from models.hanoi import *
+from models.alicebob import *
 
 
 sys.setrecursionlimit(1000)
@@ -150,6 +151,16 @@ def main_hanoi():
 
 def main_AliceBob():
     print('---- Alice & Bob ----\n')
+
+    print('\n-- Predicate Model Checker --')
+    soup = alice_soup()
+    behavior_soup = BehaviourSoupSemantics(soup)
+
+    trace = predicateModelChecker(behavior_soup, alice_isAccepted)
+    if trace:
+        print(f'Trace : {trace}')
+    else:
+        print('No Trace.')
 
 
 if __name__ == '__main__':

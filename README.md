@@ -61,7 +61,7 @@ File  : algorithms.py
   * predicate_model_checker
 
 
-## Instalation / run
+## Installation / run
 
 To run :
 ```shell

@@ -156,7 +156,7 @@ def main_AliceBob():
     soup = alice_soup()
     behavior_soup = BehaviourSoupSemantics(soup)
 
-    trace = predicate_model_checker(behavior_soup, alice_isAccepted)
+    trace = predicate_model_checker(behavior_soup, alice_is_accepted)
     if trace:
         print(f'Trace : {trace}')
     else:

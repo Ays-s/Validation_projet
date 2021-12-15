@@ -1,8 +1,6 @@
-from src.kernel import *
-from src.soup import BehaviorSoup, BehaviourSoupSemantics
-import copy
-from tools.algorithms import find_accepting_bfs
+from src.soup import BehaviorSoup
 
+# TODO : adpater ce code pour alice et bob
 
 class HConfig(list):
     def __init__(self, nb_stacks, nb_disks):
@@ -28,38 +26,6 @@ class HConfig(list):
         return True
 
 
-class Hanoi(TransitionRelation, AcceptingSet):
-    def __init__(self, nb_stacks, nb_disks):
-        self.nStacks = nb_stacks
-        self.nDisks = nb_disks
-
-    def initial(self):
-        return [HConfig(self.nStacks, self.nDisks)]
-
-    def next(self, node):
-        next_states = []
-        for i in range(self.nStacks):
-            newNode = copy.deepcopy(node)
-            if newNode[i]:
-                disk = newNode[i].pop()
-                for j in range(self.nStacks):
-                    if i != j and (not newNode[j] or newNode[j][-1] > disk):
-                        tmp = copy.deepcopy(newNode)
-                        tmp[j].append(disk)
-                        next_states.append(tmp)
-        return next_states
-
-    def is_accepting(self, c):
-        k = 0
-        if not c[-1]:
-            return False
-        for disk in c[-1]:
-            if disk != self.nDisks - k:
-                return False
-            k += 1
-        return True
-
-
 def guard_def(s, t):
     return lambda c: len(c[s]) and (len(c[t]) == 0 or c[s][-1] < c[t][-1])
 
@@ -68,6 +34,7 @@ def action_def(s, t):
     def action(c):
         disk = c[s].pop()
         c[t].append(disk)
+
     return action
 
 

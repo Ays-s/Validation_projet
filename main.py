@@ -128,15 +128,7 @@ def main_hanoi():
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
 
 
-    print("\n-- ModelChecker --")
-    result = modelChecker(3, 4)
-    if result[0]:
-        print(f"Solution found ! --> {result[1]}")
-    else:
-        print(f"No solution founded :(")
-
-
-    print('\n-- Get Trace --')
+    print('\n-- Predicate Model Checker --')
     soup = hanoi_soup(3, 4)
     behavior_soup = BehaviourSoupSemantics(soup)
 
@@ -146,8 +138,10 @@ def main_hanoi():
     else:
         print('No Trace.')
 
+
 def main_AliceBob():
     print('---- Alice & Bob ----\n')
+
 
 if __name__ == '__main__':
     if len(sys.argv) == 2 and sys.argv[1] == 'hanoi':

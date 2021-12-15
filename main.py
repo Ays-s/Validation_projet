@@ -1,5 +1,6 @@
 import inspect
 import sys
+from typing import Mapping
 
 from src.graph import Graph
 from src.node import Node
@@ -9,9 +10,8 @@ from models.hanoi import *
 
 sys.setrecursionlimit(1000)
 
-
-if __name__ == '__main__':
-
+def main_hanoi():
+    print('---- Hanoï ----\n')
     # Nodes definition
     A = Node('A')
     B = Node('B')
@@ -44,6 +44,7 @@ if __name__ == '__main__':
     D_access_list = graph.list_depth_first_search(D)
     print(f'Accessibles nodes from {D} : {D_access_list}')
 
+
     # Get reachable nodes
     print('\n-- Hash method --')
     A_access_hash = graph.hash_depth_first_search(A)
@@ -51,6 +52,7 @@ if __name__ == '__main__':
 
     D_access_hash = graph.hash_depth_first_search(D)
     print(f'Accessibles nodes from {D} : {D_access_hash}')
+
 
     print("\n-- Hanoi Model --")
     hanoi = ParentStoreProxy(Hanoi(3, 3))
@@ -61,6 +63,7 @@ if __name__ == '__main__':
     for i in range(len(step1)):
         print(f'Step_2.{i} : {hanoi.next(step1[i])}')
 
+
     print('\n-- Hash --')
     for i in range(len(step1)):
         print(f'Step_{i}   : {hash(step1[i])} -- {step1[i]}')
@@ -68,12 +71,15 @@ if __name__ == '__main__':
         for j in range(len(step2)):
             print(f'Step_{i}.{j} : {hash(step2[j])} -- {step2[j]}')
 
+
     print('\n-- Accepting_Bfs --')
     parentStore = ParentStoreProxy(hanoi)
     res, n = find_accepting_bfs(parentStore)
     print(f"Accepted : {res} -> bfs : {n}")
 
+
     print(f"\n-- Parents --\nParents Hashmap: {parentStore.parents}")
+
 
     print('\n-- Guard & action --')
     hanoi = ParentStoreProxy(Hanoi(3, 3))
@@ -95,6 +101,7 @@ if __name__ == '__main__':
             a = action(init)
         print(f'Action {i},{j} : {"ok" if g else "not ok"} -> {init}')
 
+
     print("\n-- Hanoi soup --")
     soup = hanoi_soup(3, 3)
     behavior_soup = BehaviourSoupSemantics(soup)
@@ -108,15 +115,18 @@ if __name__ == '__main__':
             exec_init = behavior_soup.execute(init, action)
             print(f"execution output : {exec_init}")
 
+
     print("\n-- STR2TR --")
     str2tr = STR2TR(behavior_soup)
     init_str = str2tr.initial()[0]
     next = str2tr.next(init_str)
     print(f"next states from {init_str} is : {next}")
 
+
     print("\n-- AcceptingProxy --")
     validation = IsAcceptingProxy(str2tr, isAccepted)
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
+
 
     print("\n-- ModelChecker --")
     result = modelChecker(3, 4)
@@ -135,3 +145,21 @@ if __name__ == '__main__':
         print(f'Trace : {trace}')
     else:
         print('No Trace.')
+
+def main_AliceBob():
+    print('---- Alice & Bob ----\n')
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2 and sys.argv[1] == 'hanoi':
+        main_hanoi()
+    elif (len(sys.argv) == 2 and sys.argv[1] == 'alice'):
+        main_AliceBob()
+    else:
+        print('Usage: python main.py [hanoi/alice]')
+        hanoi = input('Run hanoi ? [Y/n]')
+        if hanoi not in ('n','N','No','Non','no','non'):
+            main_hanoi()
+        else:
+            alice = input('Run alice ? [Y/n]')
+            if alice not in ('n','N','No','Non','no','non'):
+                main_AliceBob()

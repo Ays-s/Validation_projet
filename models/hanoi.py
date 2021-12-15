@@ -80,7 +80,7 @@ def hanoi_soup(nb_stacks, nb_disks):
     return soup
 
 
-def isAccepted(c):
+def is_accepted(c):
     nDisks = max(max(c))
 
     if len(c[-1]) != nDisks:

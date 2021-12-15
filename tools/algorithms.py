@@ -68,7 +68,7 @@ def get_trace(afind_actepting_bfs, parentProxy):
         trace.reverse()
         return trace    
 
-def predicateModelChecker(behavior_soup, isAccepted ):
+def predicate_model_checker(behavior_soup, isAccepted):
     str2tr = kernel.STR2TR(behavior_soup)
     aAcceptingProxy = kernel.IsAcceptingProxy(str2tr, isAccepted)
     aParentStore = kernel.ParentStoreProxy(aAcceptingProxy)

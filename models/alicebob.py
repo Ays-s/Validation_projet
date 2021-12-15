@@ -12,17 +12,17 @@ class ABConfig(list):
     def __str__(self):
         am, aj, bm, bj = '    ', '    ','    ', '    '
         if self[0] == -1:
-            am = 'A   '
+            am = '\033[1;32;40m A  \033[0m'
         elif self[0] == 0 :
-            aj = 'Alic'
+            aj = '\033[1;32;40mAlic\033[0m'
         else :
-            am = 'A ok'
+            am = '\033[1;32;40mA ok\033[0m'
         if self[1] == -1:
-            bm = 'B   '
+            bm = '\033[1;36;40m B  \033[0m'
         elif self[1] == 0 :
-            bj = 'Bob '
+            bj = '\033[1;36;40m Bob\033[0m'
         else :
-            bm = 'B ok' 
+            bm = '\033[1;36;40mB ok\033[0m'
         res = f"""
 Maison Alice {am}                   -- Maison
 Maison           -- jardin {aj}{bj} -- Maison Bob {bm}

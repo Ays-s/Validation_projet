@@ -8,6 +8,29 @@ class ABConfig(list):
 
     def __hash__(self):
         return self[0] + 10*self[1]
+    
+    def __str__(self):
+        am, aj, bm, bj = '', '','', ''
+        if self[0] == -1:
+            am = 'A'
+        elif self[0] == 0 :
+            aj = 'A'
+        else :
+            am = 'A ok'
+        if self[1] == -1:
+            bm = 'B'
+        elif self[0] == 0 :
+            bj = 'B'
+        else :
+            bm = 'B ok' 
+        res = f"""Maison Alice {am}                   -- Maison
+                  Maison           -- jardin {aj}{bj} -- Maison Bob {bm}
+                  Maison                                 Maison"""
+        return res
+    
+    def __repr__(self):
+        res = self.__str__()
+        return '\n'+res+'\n'
 
 
 def alice_guard_def(b):

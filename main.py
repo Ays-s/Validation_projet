@@ -134,7 +134,7 @@ def main_hanoi():
 
 
     print("\n-- AcceptingProxy --")
-    validation = IsAcceptingProxy(str2tr, isAccepted)
+    validation = IsAcceptingProxy(str2tr, is_accepted)
     print(f"checking acceptance of initial state : {validation.is_accepting(validation.operand.initial()[0])}")
 
 
@@ -142,7 +142,7 @@ def main_hanoi():
     soup = hanoi_soup(3, 4)
     behavior_soup = BehaviourSoupSemantics(soup)
 
-    trace = predicateModelChecker(behavior_soup, isAccepted)
+    trace = predicate_model_checker(behavior_soup, is_accepted)
     if trace:
         print(f'Trace : {trace}')
     else:

@@ -4,49 +4,66 @@ GUILLERMO Ayrwan, QUESTROY Hugo & LEDENTU Enzo
 ------
 ENSTA Bretagne
 
-
-## Partie I
-
-### Models
+## Models
 File  : hanoi.py  
-* Class : 
+* Classes : 
   * HConfig
   * Hanoi
-* Methodes : 
+* Functions : 
   * guard_def
   * action_def
   * hanoi_soup
+  * is_accepted
 
-### Src
+File  : alicebob.py 
+* Classes : 
+  * ABConfig
+* Functions : 
+  * alice_guard_def
+  * alice_action_def
+  * alice_soup
+  * alice_is_accepted
+* Going to be upgraded
+
+## Src
 File  : graph.py  
-* Class : 
+* Classes : 
   * Graph
   * NFA
 
 File  : kernel.py  
-* Class : 
+* Classes : 
   * TransitionRelation
   * AcceptingSet
   * IdentityProxy
   * ParentStoreProxy
-  * BehaviorSoup
+  * SemanticTransitionRelation
+  * STR2TR
+  * IsAcceptingProxy
+
+File : soup.py
+* Classes :
   * Behavior
+  * BehaviorSoup
+  * BehaviorSoupSemantics
 
 File  : node.py  
 * Class : 
   * Node
 
-### Tools
+## Tools
 File  : algorithms.py  
-* Methodes : 
+* Methods : 
   * reachable_bfs
   * is_safe_bfs
   * find_accepting_bfs
+  * get_trace
+  * predicate_model_checker
 
 
-## Instalation / run
+## Installation / run
 
 To run :
 ```shell
-python main.py
+python main.py [hanoi/alice]
 ```

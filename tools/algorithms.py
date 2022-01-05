@@ -17,24 +17,8 @@ def reachable_bfs(g):
                 frontiere.append(n)
     return known
 
-def reachable_bfsNew(g, neighbours = None):
-    known = set()
-    frontiere = deque()
-    if not neighbours:
-        neighbours = [g.initial()]
-    for n in neighbours:
-            if n not in known:
-                known.add(n)
-                frontiere.append(n)
-    while frontiere:
-        neighbours = g.next(frontiere.popleft())
-        for n in neighbours:
-            if n not in known:
-                known.add(n)
-                frontiere.append(n)  
-    return known
 
-def find_loops(g):
+def find_loop(g):
     known = set()
     frontiere = deque()
     at_start = True
@@ -53,16 +37,17 @@ def find_loops(g):
                 frontiere.append(n)
     return False, None
 
+
 def is_reachable_bfs(g, start, end):
     known = set()
     frontiere = deque()
-    at_start = True
-    while frontiere or at_start:
-        if at_start:
-            neighbours = [start]
-            at_start = False
-        else:
-            neighbours = g.next(frontiere.popleft())
+    neighbours = [start]
+    for n in neighbours:
+        if n not in known:
+            known.add(n)
+            frontiere.append(n)
+    while frontiere:
+        neighbours = g.next(frontiere.popleft())
         for n in neighbours:
             if n == end:
                 return True
@@ -91,13 +76,16 @@ def is_safe_bfs(g):
     return True
 
 
-def find_accepting_bfs(g):
+def find_accepting_bfs(g, initial = None):
     known = set()
     frontiere = deque()
     at_start = True
     while frontiere or at_start:
         if at_start:
-            neighbours = g.initial()
+            if initial:
+                neighbours = initial
+            else:
+                neighbours = g.initial()
             at_start = False
         else:
             neighbours = g.next(frontiere.popleft())
@@ -121,6 +109,18 @@ def get_trace(afind_actepting_bfs, parentProxy):
         trace.reverse()
         return trace    
 
+def get_loop_trace(afind_loop_bfs, parentProxy, loopNode):
+    result, final = afind_loop_bfs(parentProxy, loopNode)
+    if result:
+        trace = [final]
+        tmp = parentProxy.parents[final]
+        while tmp != final:
+            trace.append(tmp)
+            tmp = parentProxy.parents[tmp]
+        trace.append(final)
+        trace.reverse()
+        return trace
+
 def predicate_model_checker(behavior_soup, isAccepted):
     str2tr = kernel.STR2TR(behavior_soup)
     aAcceptingProxy = kernel.IsAcceptingProxy(str2tr, isAccepted)
@@ -132,5 +132,9 @@ def loop_model_checker(behavior_soup, isAccepted):
     str2tr = kernel.STR2TR(behavior_soup)
     aAcceptingProxy = kernel.IsAcceptingProxy(str2tr, isAccepted)
     aParentStore = kernel.ParentStoreProxy(aAcceptingProxy)
-    res = find_loops(aParentStore)
-    return res
+    aParentStore2 = kernel.ParentStoreProxy(aAcceptingProxy)
+    trace = get_trace(find_accepting_bfs, aParentStore)
+    loopNode = find_loop(aParentStore)[1]
+    loopNode = aParentStore2.next(loopNode)
+    loop_trace = get_loop_trace(find_accepting_bfs, aParentStore2, loopNode)
+    return trace, loop_trace

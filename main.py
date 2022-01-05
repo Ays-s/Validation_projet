@@ -148,8 +148,8 @@ def main_hanoi():
     else:
         print('No Trace.')
     print('\n-- Loops --\n')
-    loop = loop_model_checker(behavior_soup, is_accepted)
-    print(loop)
+    head, loop = loop_model_checker(behavior_soup, is_accepted)
+    print(f'Head : {head}\nLoop : {loop}')
 
 
 def main_AliceBob():
@@ -165,8 +165,8 @@ def main_AliceBob():
     else:
         print('No Trace.')
     print('\n-- Loops --\n')
-    loop = loop_model_checker(behavior_soup, alice_is_accepted)
-    print(loop)
+    head, loop = loop_model_checker(behavior_soup, alice_is_accepted)
+    print(f'Head : {head}\nLoop : {loop}')
 
 if __name__ == '__main__':
     if len(sys.argv) != 2 :

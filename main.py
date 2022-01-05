@@ -147,6 +147,9 @@ def main_hanoi():
         print(f'Trace : {trace}')
     else:
         print('No Trace.')
+    print('\n-- Loops --\n')
+    loop = loop_model_checker(behavior_soup, is_accepted)
+    print(loop)
 
 
 def main_AliceBob():
@@ -161,7 +164,9 @@ def main_AliceBob():
         print(f'Trace : {trace}')
     else:
         print('No Trace.')
-
+    print('\n-- Loops --\n')
+    loop = loop_model_checker(behavior_soup, alice_is_accepted)
+    print(loop)
 
 if __name__ == '__main__':
     if len(sys.argv) != 2 :

@@ -84,3 +84,19 @@ def alice_soup():
 
 def alice_is_accepted(c):
     return c[0] == 1 and c[1] == 1
+
+
+def a_in_cs(c):
+    return c[0] == 0
+
+
+def b_in_cs(c):
+    return c[1] == 0
+
+
+def exclusion_buchi():
+    delta = {
+        0: [(lambda kc:True, 0), (lambda kc:a_in_cs(kc) and b_in_cs(kc), 1)],
+        1: [(lambda kc:True, 1)]
+    }
+    return 0, delta, lambda c: c == 1

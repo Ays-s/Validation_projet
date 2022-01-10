@@ -121,3 +121,23 @@ class KripkeBuchiSTR(SemanticTransitionRelation):
         ktarget, baction = action
         bsrc = conf  # _, bsrc + uncomment STR2OSTR + add layer
         return ktarget, self.rhs.execute(ktarget, baction, bsrc)
+
+
+class BuchiSemantics(SemanticTransitionRelation):
+    def __init__(self, delta):
+        super(BuchiSemantics, self).__init__()
+        self.delta = delta
+
+        def initial(self):
+            return super(BuchiSemantics, self).initial()
+
+        def actions(self, i, conf):
+            actives = []
+            actions = self.delta[conf]
+            for a in actions:
+                if a[0](i):
+                    actives.append(a)
+            return actives
+
+        def execute(self, i, conf, action):
+            return action[i]

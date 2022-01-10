@@ -1,6 +1,7 @@
 from collections import deque
 from src import kernel
 
+
 def reachable_bfs(g):
     known = set()
     frontiere = deque()
@@ -97,6 +98,7 @@ def find_accepting_bfs(g, initial = None):
                 frontiere.append(n)
     return False, None
 
+
 def get_trace(afind_actepting_bfs, parentProxy):
     result, tmp = afind_actepting_bfs(parentProxy)
     if result:
@@ -109,6 +111,7 @@ def get_trace(afind_actepting_bfs, parentProxy):
         trace.reverse()
         return trace    
 
+
 def get_loop_trace(afind_loop_bfs, parentProxy, loopNode):
     result, final = afind_loop_bfs(parentProxy, loopNode)
     if result:
@@ -120,6 +123,7 @@ def get_loop_trace(afind_loop_bfs, parentProxy, loopNode):
         trace.append(final)
         trace.reverse()
         return trace
+
 
 def predicate_model_checker(behavior_soup, isAccepted):
     str2tr = kernel.STR2TR(behavior_soup)

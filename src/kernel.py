@@ -65,3 +65,59 @@ class IsAcceptingProxy(IdentityProxy):
 
     def is_accepting(self, c):
         return self.predicate(c)
+
+
+# class OutputSTR(SemanticTransitionRelation):
+#     def __init__(self):
+#         super().__init__()
+
+
+# class STR2OSTR:
+#     def __init__(self, op):
+#         self.operand = op
+#
+#     def initial(self):
+#         return self.operand.initial()
+#
+#     def action(self, c):
+#         return self.operand.actions(c)
+#
+#     def execute(self, c, source, a):
+#         target = self.operand.execute(c, a)
+#         return (source, a, target), target
+
+
+class KripkeBuchiSTR(SemanticTransitionRelation):
+    def __init__(self, lhs, rhs):
+        self.lhs = lhs
+        self.rhs = rhs
+
+    def initial(self):
+        return list(map(lambda rc: (None, rc), self.rhs.initial()))
+
+    def actions(self, source):
+        synchronous_actions = []
+        kripke_src, buchi_src = source
+        if kripke_src is None:
+            for k_target in self.lhs.initial():
+                self.get_synchronous_actions(k_target, buchi_src, synchronous_actions)
+            return synchronous_actions
+        k_actions = self.lhs.actions(kripke_src)
+        num_actions = len(k_actions)
+        for ka in k_actions:
+            ktarget = self.lhs.execute(kripke_src, ka)  # _, ktarget + uncomment STR2OSTR + add layer
+            if ktarget is None:
+                num_actions -= 1
+            self.get_synchronous_actions(ktarget, buchi_src, synchronous_actions)
+
+        if num_actions == 0:
+            self.get_synchronous_actions(kripke_src, buchi_src, synchronous_actions)
+
+    def get_synchronous_actions(self, kripke_c, buchi_c, io_synca):
+        buchi_actions = self.rhs.actions(kripke_c, buchi_c)
+        return io_synca.extend(map(lambda ba:(kripke_c, ba), buchi_actions))
+
+    def execute(self, conf, action):
+        ktarget, baction = action
+        bsrc = conf  # _, bsrc + uncomment STR2OSTR + add layer
+        return ktarget, self.rhs.execute(ktarget, baction, bsrc)

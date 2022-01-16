@@ -67,24 +67,59 @@ class IsAcceptingProxy(IdentityProxy):
         return self.predicate(c)
 
 
-# class OutputSTR(SemanticTransitionRelation):
-#     def __init__(self):
-#         super().__init__()
+class oSTR:
+    def __init__(self, str):
+        self.operand = str
+
+    def actions(self, conf):
+        return self.operand.actions(conf)
+
+    def execute(self, conf, actions):
+        targets = []
+        for a in actions(conf):
+            target = self.operand.execute(conf, a)
+            targets.append(target)
+        return targets, self.operand
 
 
-# class STR2OSTR:
-#     def __init__(self, op):
-#         self.operand = op
-#
-#     def initial(self):
-#         return self.operand.initial()
-#
-#     def action(self, c):
-#         return self.operand.actions(c)
-#
-#     def execute(self, c, source, a):
-#         target = self.operand.execute(c, a)
-#         return (source, a, target), target
+
+class iSTR:
+    def __init__(self, str):
+        self.operand = str
+
+    def actions(self, i, conf):
+        actions = self.operand.actions(conf)
+        for a in actions:
+            if a[0](i):
+                actions.append(a)
+        return actions
+
+    def execute(self, i, conf, actions):
+        targets =[]
+        for a in actions(conf):
+            target = self.operand.execute(conf,a)
+            target.append(target)
+        return targets[conf](i)
+
+
+
+
+
+
+
+class STR2OSTR:
+    def __init__(self, op):
+        self.operand = op
+
+    def initial(self):
+        return self.operand.initial()
+
+    def action(self, c):
+        return self.operand.actions(c)
+
+    def execute(self, c, source, a):
+        target = self.operand.execute(c, a)
+        return (source, a, target), target
 
 
 class KripkeBuchiSTR(SemanticTransitionRelation):

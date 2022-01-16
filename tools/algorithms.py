@@ -89,7 +89,8 @@ def find_accepting_bfs(g, initial = None):
                 neighbours = g.initial()
             at_start = False
         else:
-            neighbours = g.next(frontiere.popleft())
+            conf = frontiere.popleft()
+            neighbours = g.next(conf)
         for n in neighbours:
             if g.is_accepting(n):
                 return True, n

@@ -169,10 +169,10 @@ def main_AliceBob():
     print(f'Head : {head}\nLoop : {loop}')
 
     print('\n-- Buchi checker --')
-    buchi_init, buchi_graph, buchi_acceptance = exclusion_buchi()
-    semantic = BuchiSemantics(buchi_graph)
+    exclusion_buchi_output = exclusion_buchi()
+    semantic = BuchiSemantics(exclusion_buchi_output)
     kripkeBuchiSTR = KripkeBuchiSTR(behavior_soup, semantic)
-    checker = predicate_model_checker(kripkeBuchiSTR, buchi_acceptance)
+    checker = predicate_model_checker(kripkeBuchiSTR, lambda c: semantic.pred(c[1]))
     if checker:
         print(f'Trace : {checker}')
     else:

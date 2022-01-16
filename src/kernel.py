@@ -18,6 +18,13 @@ class IdentityProxy:
     def __getattr__(self, __attr):
         return getattr(self.operand, __attr)
 
+    def initial(self):
+        return self.operand.initial()
+
+    def next(self, c):
+        return self.operand.next(c)
+
+
 
 class ParentStoreProxy(IdentityProxy):
     def __init__(self, operand):
@@ -25,6 +32,7 @@ class ParentStoreProxy(IdentityProxy):
         self.parents = {}
 
     def next(self, config):
+        #print((self.operand))
         neighs = self.operand.next(config)
         for n in neighs:
             if n not in self.parents:
@@ -52,6 +60,7 @@ class STR2TR:
 
     def next(self, c):
         targets = []
+        print(self.operand)
         for a in self.operand.actions(c):
             target = self.operand.execute(c, a)
             targets.append(target)
@@ -147,6 +156,7 @@ class KripkeBuchiSTR(SemanticTransitionRelation):
 
         if num_actions == 0:
             self.get_synchronous_actions(kripke_src, buchi_src, synchronous_actions)
+        return synchronous_actions
 
     def get_synchronous_actions(self, kripke_c, buchi_c, io_synca):
         buchi_actions = self.rhs.actions(kripke_c, buchi_c)
@@ -158,21 +168,22 @@ class KripkeBuchiSTR(SemanticTransitionRelation):
         return ktarget, self.rhs.execute(ktarget, baction, bsrc)
 
 
-class BuchiSemantics(SemanticTransitionRelation):
-    def __init__(self, delta):
-        super(BuchiSemantics, self).__init__()
-        self.delta = delta
+class BuchiSemantics(iSTR):
+    def __init__(self, t):
+        self.ini = t[0]
+        self.delta = t[1]
+        self.pred = t[2]
 
-        def initial(self):
-            return super(BuchiSemantics, self).initial()
+    def initial(self):
+        return [self.ini]
 
-        def actions(self, i, conf):
-            actives = []
-            actions = self.delta[conf]
-            for a in actions:
-                if a[0](i):
-                    actives.append(a)
-            return actives
+    def actions(self, i, c):
+        actions = []
+        for a in self.delta[c]:
+            if a[0](i):
+                actions.append(a)
+        return actions
 
-        def execute(self, i, conf, action):
-            return action[i]
+    def execute(self, i, conf, a):
+        return a[1]
+

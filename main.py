@@ -168,6 +168,16 @@ def main_AliceBob():
     head, loop = loop_model_checker(behavior_soup, alice_is_accepted)
     print(f'Head : {head}\nLoop : {loop}')
 
+    print('\n-- Buchi checker --')
+    exclusion_buchi_output = exclusion_buchi()
+    semantic = BuchiSemantics(exclusion_buchi_output)
+    kripkeBuchiSTR = KripkeBuchiSTR(behavior_soup, semantic)
+    checker = predicate_model_checker(kripkeBuchiSTR, lambda c: semantic.pred(c[1]))
+    if checker:
+        print(f'Trace : {checker}')
+    else:
+        print('No Trace.')
+
 if __name__ == '__main__':
     if len(sys.argv) != 2 :
         usage()

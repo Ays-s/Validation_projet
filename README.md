@@ -2,7 +2,7 @@
 
 GUILLERMO Ayrwan, QUESTROY Hugo & LEDENTU Enzo
 ------
-ENSTA Bretagne
+ENSTA Bretagne 3A
 
 ## Models
 File  : hanoi.py  
